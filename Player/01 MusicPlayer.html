@@ -427,27 +427,27 @@
         }
         //更新音樂當前時間
         function setTime(){
-            myMusic.currentTime = titlebar.value / 10000;
-            setProcessRange();
+            // myMusic.currentTime = titlebar.value / 10000;
+            // setProcessRange();
         }
         
         function setTimeInitial(){
-            titlebar.max = myMusic.duration * 10000; //音樂的總長度
-            setInterval(setProcessRange, 1000);
+            // titlebar.max = myMusic.duration * 10000; //音樂的總長度
+            // setInterval(setProcessRange, 1000);
         }
 
         function setProcessRange() {
-            var currentTime = myMusic.currentTime; //目前播放時間
-            var duration = myMusic.duration; //音樂總長度
+            // var currentTime = myMusic.currentTime; //目前播放時間
+            // var duration = myMusic.duration; //音樂總長度
 
-            time.innerHTML = formatTime(currentTime) + " / " + formatTime(duration); //顯示時間
-            titlebar.value = currentTime * 10000; //更新進度條的值
+            // time.innerHTML = formatTime(currentTime) + " / " + formatTime(duration); //顯示時間
+            // titlebar.value = currentTime * 10000; //更新進度條的值
 
-            myMusic.currentTime = titlebar.value / 10000;
+            // myMusic.currentTime = titlebar.value / 10000;
 
-            var percent = (currentTime / duration) * 100; //計算進度條百分比
-            //塗音量條的顏色
-            titlebar.style.backgroundImage = `linear-gradient(to right, rgb(157, 109, 219) 1%, rgb(109, 111, 219) ${percent}%,white ${percent}%)`;
+            // var percent = (currentTime / duration) * 100; //計算進度條百分比
+            // //塗音量條的顏色
+            // titlebar.style.backgroundImage = `linear-gradient(to right, rgb(157, 109, 219) 1%, rgb(109, 111, 219) ${percent}%,white ${percent}%)`;
         }
 
         var mode = document.getElementById("mode");
