@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class people{
+            #name;
+            #age;  
+            #address;
+            #tel;
+
+            constructor(name, age, address, tel){
+                this.#name = name;
+                this.#age = age;
+                this.#address = address;
+                this.#tel = tel;
+            }
+
+            //方法
+            Walk(){
+                return "走路";
+            }
+            Run(){
+                return "跑步";
+            }
+            Eat(){
+                return "吃東西";
+            }
+            Jump(){
+                return "跳躍";
+            }
+
+        }
+
+        //Male繼承people
+        class Male extends people{
+            constructor(name, age, address, tel){
+                super(name, age, address, tel);
+            }
+
+            //方法
+            SleepAllDay(){
+                return "睡整天覺";
+            }  
+        }
+
+        let jack = new Male("Jack", 18, "台北", "0912345678");//物件
+        let tom = new Male("Tom", 20, "台北", "0912345678");//物件
+
+        jack.Run();
+        tom.Eat();
+    </script>
+</body>
+</html>

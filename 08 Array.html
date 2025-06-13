@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //讓彩虹一各自的顏色出現
+        var Rainbow = ["紅", "橙", "黃", "綠", "藍", "靛", "紫"];
+        var color = ["red", "orange", "yellow", "green", "blue", "indigo", "violet"];
+        for (var i = 0; i < Rainbow.length; i++) {
+            document.write(`<span style="color:${color[i]}">${Rainbow[i]}</span>`);
+        }
+
+        document.write("<hr>");
+
+        //練習在陣列中加入新的元素
+        var arr = [];
+        arr.push("apple");
+        arr.push("banana");
+        for (var i = 0; i < arr.length; i++) {
+            document.write(arr[i] + "<br>");
+        }
+        document.write("<hr>");
+
+
+        //依學生分數等第排列
+        //區分等第
+        //90分以上為優等, 80~89分為甲等, 70~79分為乙等, 60~69分為丙等, 60分以下為丁等
+        //輸出範例:
+        //S001-王小明-優等
+        //S002-王大明-甲等
+        //S003-王中明-丁等
+
+        var arrStudentNo = ["S001", "S002", "S003", "S004", "S005", "S006", "S007", "S008", "S009", "S010"];
+        var arrStudentName = ["王小明", "王大明", "王中明", "王右明", "王左明", "王上明", "王下明", "張三", "李四", "王五"];
+        var arrStudentScore = [92, 87, 56, 68, 85, 83, 77, 71, 85, 93];
+        var arrGrade = [];
+
+
+        /* //使用for迴圈來判斷分數的等第
+        for(var i=0; i<arrStudentScore.length; i++){
+            if(arrStudentScore[i]==100){
+                arrGrade.push("優等");
+            }
+            else if(arrStudentScore[i] >=90){
+                arrGrade.push("優等");
+            }
+            else if(arrStudentScore[i] >=80){
+                arrGrade.push("甲等");
+            }
+            else if(arrStudentScore[i] >=70){
+                arrGrade.push("乙等");
+            }
+            else if(arrStudentScore[i] >=60){
+                arrGrade.push("丙等");
+            }
+            else if(arrStudentScore[i] >=0){
+                arrGrade.push("丁等");
+            }
+        } */
+
+        //不使用迴圈來判斷等第 >> 用空間換取時間
+        var arrNumber = ["丁等", "丁等", "丁等", "丁等", "丁等", "丁等", "丙等", "乙等", "甲等", "優等", "優等"]; //寫出每10分的級距
+        var index = 0; //index為陣列的索引值
+        for (var i = 0; i < arrStudentScore.length; i++) {
+            index = parseInt(arrStudentScore[i] / 10);
+            arrGrade.push(arrNumber[index]);
+        }
+
+
+        /* for(var m=0; m<arrStudentScore.length; m++){
+            var arrTemp=[];
+
+            for(var n=0; n<arrStudentScore.length; n++){
+                if(arrStudentScore[m] >= arrStudentScore[n]){
+                    arrTemp.push(arrStudentScore[n]);
+                }
+            }
+
+            arrNumber.push(arrStudentScore[j]);
+        }
+         */
+        for (var k = 0; k < arrStudentNo.length; k++) {
+            document.write(arrStudentNo[k] + "-" + arrStudentName[k] + "-" + arrStudentScore[k] + "-" + arrGrade[k] + "<br>");
+        }
+
+    </script>
+</body>
+
+</html>

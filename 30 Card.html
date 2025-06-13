@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+    <style>
+        .jumbotron {
+            background-image: url('photo/00.jpg');
+            background-repeat: round;
+        }
+
+        .textShadow {
+            text-shadow: 2px 2px 4px #000000;
+        }
+
+        small,
+        .small {
+            font-size: 0.7em;
+        }
+
+        .imagebg{
+            background-image: url('photo/04.jpg');
+            background-size:cover;
+            background-position: center;
+            background-attachment: fixed;
+            width: 100%;
+            
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        function img() {
+            let img = ""
+            for (var i = 1; i <= 7; i++) {
+                img += '<img src="photo/0' + i + '.jpg" width="100" class="img-thumbnail">';
+            }
+            document.getElementById("img").innerHTML = img;
+        }
+
+    </script>
+    <div class="container">
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner" >
+            <div class="carousel-item active">
+            <img class="d-block w-100" src="photo/01.jpg" alt="First slide">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>瑪雅文化遺跡</h5>
+                <p>123456</p>
+            </div>
+            </div>
+            <div class="carousel-item">
+            <img class="d-block w-100" src="photo/02.jpg" alt="Second slide">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>吳哥窟</h5>
+                <p>123456</p>
+            </div>
+            </div>
+            <div class="carousel-item">
+            <img class="d-block w-100" src="photo/03.jpg" alt="Third slide">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>下龍灣</h5>
+                <p>123456</p>
+            </div>
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+        </div>
+        
+        <div class="bg-secondary-subtle p-5 mt-3 rounded shadow jumbotron">
+            <h1 class="fw-bold text-white textShadow">讀萬卷書，行萬里路</h1>
+            <p><strong class="text-white textShadow"><small>天地之浩瀚，皆可入我眼</small></strong></p>
+            <hr>
+            <button class="btn btn-success btn-lg">More</button>
+        </div>
+
+        
+
+        <div class="card border-0 shadow mt-3">
+            <div class="row g-0">
+                <div class="col-lg-3" id="img">
+                    <img src="photo/01.jpg" width="300" class="img-fluid rounded-start" alt="...">
+                </div>
+                <div class="col-lg-9">
+                    <div class="card-body">
+                        <h2 class="card-title fw-bold">瑪雅文化遺跡</h2>
+                        <p class="card-text">瑪雅文化遺跡瑪雅文化遺跡瑪雅文化遺跡瑪雅文化遺跡瑪雅文化遺跡</p>
+                        <hr>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-success btn-lg">預定行程</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="imagebg">
+            <div class="container ratio ratio-16x9">
+            <!-- <iframe src="https://www.youtube.com/embed/1i3EBSxjLAY?si=bBjTifoVI88-5dhE" title="YouTube video" allowfullscreen></iframe> -->
+             <iframe width="560" height="315" src="https://www.youtube.com/embed/Ju8Hr50Ckwk?si=NoHFarmz2iXomEtZ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+
+</html>

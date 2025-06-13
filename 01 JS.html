@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01 JS.html</title>
+</head>
+
+<body>
+
+    <script>
+        /*var a = 3; //var 宣告一個變數a，並附值a=3
+        var b = 5;
+        a = a + b;
+
+        a = new Date();
+
+        document.write(a);
+        */
+
+        //每秒自動更新
+        /*setTimeout(function(){
+            location.reload();
+        }, 1000);*/
+
+
+        //1. 資料型態 Data Type
+        /*var a = "123"; //宣告及初始化
+        var b = 123;
+        document.write(a + b); //此行無法成功運算，因兩者資料型態不同，後面的變數b被"隱含轉換"成字串，變成「字串+字串」
+        document.write(`<br/>`);
+        document.write(a - b);
+        document.write(`<br/>`);
+        document.write(a * b);
+        document.write(`<br/>`);
+        document.write(a / b);
+        */
+
+        //2. JS 只有三種資料型態
+        //(1) 數值 (Number)
+        //(2) 字串 (String)
+        //(3) 布林 (Boolean)
+
+        var a = "adgergrt";
+        var b = 123;
+        var c = true;
+
+        //a=456; //指定運算(賦值)
+
+        document.write(a + `<br/>`);
+        document.write(b + `<br/>`);
+        document.write(c + `<br/>`);
+        document.write(`<hr>`);
+
+        //運用typeof去取得該變數的資料型態
+        document.write(typeof (a) + `<br/>`);
+        document.write(typeof (b) + `<br/>`);
+        document.write(typeof (c) + `<br/>`);
+        document.write(`<hr>`);
+
+        document.write("a=" + a);
+        document.write(", b=" + b);
+        document.write(", c=" + c);
+
+        var i=0x123; //宣告16進位
+        var j=01234; //宣告8進位
+
+
+    </script>
+
+</body>
+
+</html>

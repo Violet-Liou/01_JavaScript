@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <SCript>
+        //1. 雞兔同籠
+        //已知雞兔共35隻,雞兔的腳共94支,請問籠子裡雞兔各有幾隻?
+        var chicken = 0;
+        var rabbit = 0;
+        //chicken +rabbit == 35;
+        //(chicken * 2) + (rabbit * 4) == 94;
+
+        //【老師的方法】>>效能較好，因所需要的運算較少，
+        for (chicken = 0; chicken <= 35; chicken++) {
+            if ((chicken * 2) + ((35 - chicken) * 4) == 94) {
+                document.write("雞有" + chicken + "隻");
+                document.write("，兔子有" + (35 - chicken) + "隻");
+                break;
+            }
+        }
+
+        //【我的方法】 >>效能會比較差
+        for (chicken = 1; chicken <= 35; chicken++) {
+            for (rabbit = 1; rabbit <= 35; rabbit++) {
+                if (chicken + rabbit == 35 && (chicken * 2) + (rabbit * 4) == 94) {
+                    document.write("雞有" + chicken + "隻");
+                    document.write("，兔子有" + rabbit + "隻");
+                }
+            }
+        }
+
+        document.write("<hr>");
+        //2. 費氏數列
+        //1,1,2,3,5,8,13,21,34..........
+        //已知第一個數和第二個數為1
+        //第n為第n-1+第n-2
+        //請撰寫一個程式，能找出第n數為數列上的哪一個數字
+        var number;
+        var number_choose = parseInt(prompt("請輸入你想要找費氏數列上第幾個值。"));
+        if (number_choose == 1 || number_choose == 2) {
+            number = 1;
+        }
+        else {
+            var number1 = 1; //費氏數列第一個數
+            var number2 = 1; //費氏數列第二個數
+            //var number_choose2 = number_choose - 2; 
+            //【方法一】因費氏數列的前兩個數都為1，且上面已經設定過，所以先去掉第一、第二個值。
+            //原先放在for迴圈的條件式中，但如果放在裡面，在每次for迴圈時，就會需要再做一次判斷，會降低運算效率，所以可以先計算
+            for (var i = 3; i <= number_choose; i++) { //【方法二】因第一&第二的數不能進入計算(為茅點)所以從第三個數開始
+                //for (var i = 1; i <= number_choose2; i++) {
+                var number_box = number1;
+                number1 = number2;
+                number2 = number_box + number2;
+                number = number2;
+            }
+        }
+        document.write("費氏數列上第" + number_choose + "個值為" + number);
+
+        document.write("<hr>");
+        //3. 畫星星，每層比上一層多一顆
+        var star_level = parseInt(prompt("請輸入你想要畫幾層的星星？"));
+        for (var i = 1; i <= star_level; i++) {
+            for (var j = 1; j <= i; j++) {
+                document.write("*");
+            }
+            document.write("<br>");
+        }
+
+        document.write("<hr>");
+        //4. 畫星星，每層比上一層多一顆，但不能使用巢狀迴圈，僅只能使用一個迴圈 >>這個效能會比使用巢狀會更有效率
+        var star_level2 = parseInt(prompt("請輸入你想要畫幾層的星星？"));
+        var star = "";
+        for (var i = 1; i <= star_level2; i++) {
+            star = star + "*"; //因為字串無法使用乘法，所以只能用「字串+字串」的方式去串接
+            document.write(star);
+            document.write("<br>");
+        }
+
+        document.write("<hr>");
+        //5. 九九乘法表
+        for(var i=1; i<=9; i++){
+            for(var j=1; j<=9; j++){
+                document.write(i+"*"+j+"="+(i*j)+"<br>");
+            }
+            document.write("<br>");
+        }
+
+    </SCript>
+</body>
+
+</html>

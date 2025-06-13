@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="timer"></h1>
+
+    <script>
+        let timer = document.getElementById("timer");
+
+        //原始寫法
+        Date.prototype.timeFormat = A => {
+                    let h = A.getHours() < 10 ? "0" + A.getHours() : A.getHours();
+                    let m = A.getMinutes() < 10 ? "0" + A.getMinutes() : A.getMinutes();
+                    let s = A.getSeconds() < 10 ? "0" + A.getSeconds() : A.getSeconds();
+
+                    return `${h}:${m}:${s}`;
+
+        }
+
+        setInterval(() => {
+            let myDate = new Date();
+           timer.innerHTML =  myDate.timeFormat(myDate);
+        }, 1000);
+
+
+        //繼承寫法
+        class MyDate extends Date {
+            timeFormat() {
+                let h = this.getHours() < 10 ? "0" + this.getHours() : this.getHours();
+                let m = this.getMinutes() < 10 ? "0" + this.getMinutes() : this.getMinutes();
+                let s = this.getSeconds() < 10 ? "0" + this.getSeconds() : this.getSeconds();
+
+                return `${h}:${m}:${s}`;
+            }
+        }
+    </script>
+</body>
+</html>

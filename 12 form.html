@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input>
+    <input type="text">
+    <input type="password">
+    <hr>
+    <input type="button" value="我是一顆按鈕" onclick="alert('啊!!我被按了!!')"> <!-- 前端程式在用的 -->
+    <input type="reset" value="我是一顆按鈕"><!-- 將表單重置 -->
+    <input type="submit" value="submit"><!-- 把表單資料送到伺服器端 -->
+    <hr>
+    最高學歷
+    <input type="radio" name="level">博士
+    <input type="radio" name="level">碩士
+    <input type="radio" name="level">大學
+    <input type="radio" name="level">專科以下
+    <hr>
+    興趣
+    <input type="checkbox" name="box">singing
+    <input type="checkbox" name="box">climbing
+    <input type="checkbox" name="box">swimming
+    <input type="checkbox" name="box">playing ball
+    <input type="checkbox" name="box">reading
+    <input type="checkbox" name="box">going out
+    <hr>
+    <textarea rows="10" cols="50"></textarea>
+    <hr>
+    <select>
+        <option>aaaa</option>
+        <option>bbbb</option>
+    </select>
+    <hr>
+    <input type="range">
+    <input type="color">
+    <input type="datetime-local">
+
+    <hr>
+
+    <fieldset>
+        <legend>加入會員</legend>
+        <table>
+            <tr>
+                <td>姓名</td>
+                <td>
+                    <input type="text">
+                </td>
+            </tr>
+            <tr>
+                <td>性別</td>
+                <td>
+                    <input type="radio">女
+                    <input type="radio">男
+                </td>
+            </tr>
+            <tr>
+                <td style="background-color: rgb(120, 120, 161);">生日</td>
+                <td>
+                    <input type="datetime-local">
+                </td>
+            </tr>
+            <tr>
+                <td>學歷</td>
+                <td>
+                    <select>
+                        <option>博士</option>
+                        <option>碩士</option>
+                        <option>大學</option>
+                        <option>專科以下</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>地址</td>
+                <td>
+                    <input type="text" style="width: 350px;">
+                </td>
+            </tr>
+            <tr>
+                <td>興趣</td>
+                <td>
+                    <input type="checkbox">閱讀
+                    <input type="checkbox">踏青
+                    <input type="checkbox">看雲
+                    <input type="checkbox">郊遊
+                    <input type="checkbox">吟詩
+                </td>
+            </tr>
+            <tr>
+                <td>幸運色</td>
+                <td>
+                    <input type="color">
+                </td>
+            </tr>
+            <tr>
+                <td>年收入</td>
+                <td>
+                    <input type="range" min="0" max="1000000" step="10000">
+                </td>
+            </tr>
+            <tr>
+                <td>備註</td>
+                <td>
+                    <textarea rows="10" cols="50"></textarea>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+
+
+    <input type="button" value="特大" onclick="changeFontSize(this)">
+    <input type="button" value="大" onclick="changeFontSize(this)">
+    <input type="button" value="中" onclick="changeFontSize(this)">
+    <input type="button" value="小" onclick="changeFontSize(this)">
+
+    <script>
+        function changeFontSize(button) {
+            var fontSize;
+            switch (button.value) {
+                case '特大':
+                    fontSize = 'xx-large';
+                    break;
+                case '大':
+                    fontSize = 'large';
+                    break;
+                case '中':
+                    fontSize = 'medium';
+                    break;
+                case '小':
+                    fontSize = 'small';
+                    break;
+                default:
+                    fontSize = 'medium';
+            }
+            document.body.style.fontSize = fontSize;
+        }
+    </script>
+</body>
+
+</html>

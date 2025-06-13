@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Player</title>
+    <style>
+        :root {
+            /* 進度條 */
+            --progress-thumb-appearance: none;
+            --progress-thumb-width: 15px;
+            --progress-thumb-height: 15px;
+            --progress-thumb-background-color: rgb(82, 162, 182);
+            --progress-thumb-border-radius: 50%;
+            --progress-thumb-border: 2px solid rgb(4, 170, 211);
+
+            /* 音量條 */
+            --vol-thumb-appearance: none;
+            --vol-thumb-width: 15px;
+            --vol-thumb-height: 15px;
+            --vol-thumb-background-color: rgb(218, 180, 223);
+            --vol-thumb-border-radius: 50%;
+            --vol-thumb-border: 2px solid rgb(228, 124, 210);
+        }
+
+        #container {
+            width: 40%;
+            height: 700px;
+            background-color: lightblue;
+            /* position: relative; */
+            /* text-align: center; */
+            margin: auto;
+            box-shadow: 0px 0px 10px gray;
+
+            display: flex;
+            justify-content: flex-start;
+            flex-direction: column;
+            align-items: center;
+            min-width: 485px;
+        }
+
+        #musicList {
+            width: 80%;
+            height: 30px;
+            margin-top: 2rem;
+            border-radius: 5px;
+            background-color: rgb(77, 163, 212);
+            color: white;
+            font-size: 1.2rem;
+            text-align: center;
+            border: 0px;
+        }
+
+        #img {
+            position: relative;
+            /* top: 2rem; */
+            /* margin: auto; */
+            width: 80%;
+            height: 60%;
+            /* overflow: hidden; */
+        }
+
+        #img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            box-shadow: 0px 0px 10px gray;
+        }
+
+
+        #controlPanel {
+            width: 90%;
+            height: 100px;
+            /* position: absolute; */
+            bottom: 2rem;
+            padding: 10px;
+            /* display: grid; */
+
+            align-items: center;
+
+            /* display: flex;
+            justify-content: space-around;
+            align-items: center; */
+        }
+
+        #btn {
+            /* height: 100px;
+            width: 80%;
+            /* position: absolute; */
+            /* btn: 2rem;
+            padding: 10px; */
+
+            margin-top: 3%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        #btn span {
+            border: 1px solid violet;
+            padding: 5px;
+            background-color: pink;
+            border-radius: 50%;
+            box-shadow: 0px 0px 10px gray;
+            cursor: pointer;
+            position: relative;
+            color: white;
+            font-size: 2rem;
+            font-family: webdings;
+            text-align: center;
+        }
+
+        #volumeControl {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 3%;
+            /* position: absolute; */
+            /* bottom: 2rem; */
+            /* padding: 10px; */
+        }
+        
+        #title {
+            top: 2.5rem;
+            margin: auto;
+            /* width: 300px; */
+            height: 80px;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        #mainTitle {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            text-shadow: 0px 0px 10px gray;
+        }
+
+        .setMute {
+            text-decoration: line-through;
+            color: rgb(73, 231, 210);
+        }
+
+        #volumeControl input[type="text"] {
+            width: 30px;
+            height: 25px;
+            background-color: rgb(77, 163, 212);
+            color: white;
+            font-size: 0.85rem;
+            text-align: center;
+            border-radius: 5px;
+            border: 0px;
+            margin-left: 0.5rem;
+            display: none;
+        }
+
+        #title input[type="range"],
+        #volumeControl input[type="range"] {
+            width: 400px;
+            height: 10px;
+            appearance: none;
+            /* background-color: rgb(217, 150, 226); */
+            border-radius: 5px;
+            /* border: 1px solid gray; */
+            cursor: pointer;
+
+        }
+
+        /* chrom/edge 的進度條&音量調圓球設定 */
+        #title input[type="range"]::-webkit-slider-thumb{
+            appearance: none;
+        }
+
+        #title input[type="range"]::-webkit-slider-thumb:hover {
+            appearance: var(--progress-thumb-appearance);
+            width: var(--progress-thumb-width);
+            height: var(--progress-thumb-height);
+            background-color: var(--progress-thumb-background-color);
+            border-radius: var(--progress-thumb-border-radius);
+            border: var(--progress-thumb-border);
+        }
+
+        #volumeControl input[type="range"]::-webkit-slider-thumb {
+            appearance: var(--vol-thumb-appearance);
+            width: var(--vol-thumb-width);
+            height: var(--vol-thumb-height);
+            background-color: var(--vol-thumb-background-color);
+            border-radius: var(--vol-thumb-border-radius);
+            border: var(--vol-thumb-border);
+        }
+
+        /* 其他版本瀏覽器 的進度條%音量調圓球設定 */
+        #title input[type="range"]::-moz-range-thumb{
+            appearance: none;
+        }
+        #title input[type="range"]::-moz-range-thumb:hover {
+            appearance: var(--progress-thumb-appearance);
+            width: var(--progress-thumb-width);
+            height: var(--progress-thumb-height);
+            background-color: var(--progress-thumb-background-color);
+            border-radius: var(--progress-thumb-border-radius);
+            border: var(--progress-thumb-border);
+        }
+
+        #volumeControl input[type="range"]::-moz-range-thumb {
+            appearance: var(--vol-thumb-appearance);
+            width: var(--vol-thumb-width);
+            height: var(--vol-thumb-height);
+            background-color: var(--vol-thumb-background-color);
+            border-radius: var(--vol-thumb-border-radius);
+            border: var(--vol-thumb-border);
+        }
+
+        #volumeControl span {
+            border: 1px solid rgb(47, 205, 226);
+            background-color: rgb(130, 215, 230);
+            cursor: pointer;
+            font-size: 0.8rem;
+            /* box-shadow: 1px 1px 3px rgb(47, 205, 226); */
+            padding: 3px;
+            border-radius: 10%;
+        }
+
+        #btnSound {
+            border: 1px solid ;
+            padding: 5px;
+            background-color: rgb(41, 223, 208) !important;
+            border-radius: 50% !important;
+            box-shadow: 0px 0px 10px gray;
+            /* cursor: pointer; */
+            /* position: relative; */
+            color: white;
+            font-size: 1.5rem !important;
+            font-family: webdings;
+            margin-right: 0.5rem;
+        }
+
+        #volumeControl img{
+            width: 50px;
+            height: 50px;
+            margin-left: 0.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div><audio id="myMusic" src="../music/moon.mp3" onended="musicPlay()" controls></audio></div>
+    <div id="container">
+        <select id="musicList" onchange="changeMusic(0)">
+            <option value="../music/moon.mp3">月亮</option>
+            <option value="../music/airball.mp3">氣泡</option>
+            <option value="../music/elysees.mp3">Elysees</option>
+            <option value="../music/nothing.mp3">Nothing Gonna Change My Love For You</option>
+            <option value="../music/rain.mp3">Rain</option>
+            <option value="../music/travel.mp3">旅行</option>
+        </select>
+        <div id="img">
+            <img src="../img/1.jpg" alt="月亮">
+        </div>
+        <div id="controlPanel">
+            <div id="title">
+                <div id="mainTitle">月亮</div>
+                <div>
+                    <span id="time">00:00 / 00:00</span>
+                    <span id="status">循環播放</span>
+                </div>
+                <input id="titlebar" type="range" oninput="setTime();" min="0" step="1" value="0">
+            </div>
+            <div id="btn">
+                <span onclick="changeMusic(-1);">9</span>
+                <!-- <span onclick="back();">7</span> -->
+                <span onclick="backOrForward(-5);">7</span>
+                <span id="control1" onclick="play();">4</span> <!-- 播放音樂 -->
+                <!-- <span onclick="pause();">;</span> -->
+                <!-- <span onclick="forward();">8</span> -->
+                <span onclick="backOrForward(5);">8</span>
+                <span onclick="changeMusic(1);">:</span>
+                <span onclick="stop();"><</span>
+                <span id="mode" onclick="musicMode()">q</span>
+            </div>
+            <div id="volumeControl">
+                <span id="btnSound" onclick="sound();">U</span>
+                <!-- <span onclick="volumnDown();">-</span> -->
+                <span onclick="volumnChange(-1);">-</span>
+                <input type="range" oninput="setVolumnRange();" value="60">
+                <!-- <span onclick="volumnUp();">+</span> -->
+                <span onclick="volumnChange(1);">+</span>
+                <input type="text" value="60" readonly>
+                <img src="../img/logo.png" alt="分屬logo">
+            </div>
+        </div>
+    </div>
+    <script>
+        var myMusic = document.getElementById("myMusic");
+
+        //播放&暫停
+        function play() {
+            if (myMusic.paused) {
+                myMusic.play();
+                document.getElementById("control1").innerHTML = ";";
+                setTimeInitial();
+            } else {
+                myMusic.pause();
+                document.getElementById("control1").innerHTML = "4";
+            }
+            //myMusic.play();
+        }
+        //暫停
+        /* function pause() {
+            myMusic.pause();
+        } */
+
+        //停止
+        function stop() {
+            myMusic.pause();
+            //重製播放時間
+            myMusic.currentTime = 0;
+            myMusic.pause(); //音樂暫停
+            document.getElementById("control1").innerHTML = "4"; //修改播放符號
+        }
+
+        //選擇歌曲
+        function changeMusic(n) {
+            var musicList = document.getElementById("musicList");
+            var mainTitle = document.getElementById("mainTitle");
+            var img = document.getElementById("img").children[0];
+            var v = musicList.selectedIndex; //獲取目前選擇的歌曲索引
+            var index = v + n; //計算新的歌曲索引
+            myMusic.src = musicList.options[index % 6].value; //更改音樂來源
+            mainTitle.innerHTML = musicList.options[index % 6].innerText; //更改音樂標題
+            musicList.children[index % 6].selected = true; //更新選擇的歌曲索引
+
+            if((index + 1) % 6 == 0) {
+                img.src = `../img/6.jpg`; //如果是第六首歌，則圖片顯示第六張
+            }else{
+                img.src = `../img/${(index + 1) % 6}.jpg`; //更改圖片來源
+            }
+
+            if(document.getElementById("control1").innerHTML = ";") {
+                myMusic.onloadeddata = play; //等歌曲載入完畢後再播放音樂
+            }
+
+        }
+
+        //快轉&快退
+        function backOrForward(v) {
+            myMusic.currentTime += v;
+        // 快轉、快退功能分開做
+        // //快轉
+        // function forward() {
+        //     myMusic.currentTime += 5;
+        // }
+        // //快退
+        // function back() {
+        //     myMusic.currentTime -= 5;
+        // }
+        }
+
+
+        //靜音
+        function sound() {
+            // if (myMusic.muted) {
+            //     myMusic.muted = false;
+            //     event.target.className = " ";
+            // } else {
+            //     myMusic.muted = true;
+            //     event.target.className = "setMute";
+            // }
+            myMusic.muted = !myMusic.muted;
+            event.target.className = event.target.className == "setMute" ? "" : "setMute";
+        }
+
+        //音量控制
+        var volumeControl = document.getElementById("volumeControl");
+        var rangeVolumn = volumeControl.children[2];
+        var textVolumn = volumeControl.children[4];
+        //微調 - 音量加大
+        // function volumnUp() {
+        //     myMusic.volume += 0.01;
+        //     // if (myMusic.volume > 1) {
+        //     //     myMusic.volume = 1;
+        //     // }
+        //     myMusic.volume > 1 ? myMusic.volume = 1 : myMusic.volume;
+        //     textVolumn.value = Math.round(myMusic.volume * 100);
+        // }
+        // //微調 - 音量降低
+        // function volumnDown() {
+        //     myMusic.volume -= 0.01;
+        //     myMusic.volume < 0 ? myMusic.volume = 0 : myMusic.volume;
+        //     textVolumn.value = Math.round(myMusic.volume * 100);
+        // }
+
+        //微調(融合) - 音量降低&加大
+        function volumnChange(v) {
+            rangeVolumn.value = parseInt(rangeVolumn.value) + v;
+            setVolumnRange();
+        }
+
+        //音量條
+        function setVolumnRange() {
+            textVolumn.value = rangeVolumn.value;
+            myMusic.volume = textVolumn.value / 100; //真正寫入音量屬性值
+
+            //塗音量條的顏色
+            rangeVolumn.style.backgroundImage = `linear-gradient(to right, pink 10%,rgb(218, 180, 223) ${rangeVolumn.value}%,white ${rangeVolumn.value}%)`;
+        }
+
+        setVolumnRange(); //初始化音量
+
+        //音樂進度條
+        var title = document.getElementById("title");
+        var titlebar = document.getElementById("titlebar");
+        var time = document.getElementById("time");
+        var text = document.getElementById("status");
+
+        //時間格式
+        function formatTime(t) {
+            var minutes = parseInt(t.toFixed(0) / 60);
+            var seconds = parseInt(t.toFixed(0) % 60);
+
+            minutes < 10 ? "0" + minutes : minutes;
+            seconds < 10 ? "0" + seconds : seconds;
+
+            return minutes + ":" + seconds;
+        }
+        //更新音樂當前時間
+        function setTime(){
+            myMusic.currentTime = titlebar.value / 10000;
+            setProcessRange();
+        }
+        
+        function setTimeInitial(){
+            titlebar.max = myMusic.duration * 10000; //音樂的總長度
+            setInterval(setProcessRange, 1000);
+        }
+
+        function setProcessRange() {
+            var currentTime = myMusic.currentTime; //目前播放時間
+            var duration = myMusic.duration; //音樂總長度
+
+            time.innerHTML = formatTime(currentTime) + " / " + formatTime(duration); //顯示時間
+            titlebar.value = currentTime * 10000; //更新進度條的值
+
+            myMusic.currentTime = titlebar.value / 10000;
+
+            var percent = (currentTime / duration) * 100; //計算進度條百分比
+            //塗音量條的顏色
+            titlebar.style.backgroundImage = `linear-gradient(to right, rgb(157, 109, 219) 1%, rgb(109, 111, 219) ${percent}%,white ${percent}%)`;
+        }
+
+        var mode = document.getElementById("mode");
+        //音樂模式 (循環、隨機、單曲循環)
+        function musicPlay(){
+            if(text.innerText == "循環播放" && musicList.length == musicList.selectedIndex + 1){
+                changeMusic(0 - musicList.selectedIndex);
+            } else if (text.innerText == "隨機播放") {
+                var n = Math.floor(Math.random() * musicList.length); //隨機在musicList中選擇一首歌
+                if(n != musicList.selectedIndex) {
+                    changeMusic(n - musicList.selectedIndex);
+                } else {
+                    changeMusic(1); //如果隨機到的歌曲是目前播放的歌曲，則改為下一首
+                }
+            } else if (text.innerText == "單曲循環") {
+                changeMusic(0);
+            } else{
+                changeMusic(1);
+            }
+        }
+        function musicMode(){
+            if (text.innerText == "循環播放") {
+                mode.innerHTML = "s";
+                text.innerHTML = "隨機播放";
+            } else if (text.innerText == "隨機播放") {
+                mode.innerHTML = "`";
+                text.innerHTML = "單曲循環";
+            }else if (text.innerText == "單曲循環") {
+                mode.innerHTML = "q";
+                text.innerHTML = "循環播放";
+            }
+        }
+
+    </script>
+</body>
+
+</html>

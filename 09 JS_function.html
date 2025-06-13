@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="button" value="取得學生成績" onclick="getStudentScore()">
+    <div>
+        <input type="text" id="studentNo" placeholder="請問查詢第幾個學生的資料？">
+        <input type="button" value="取得某位特定學生成績" onclick="getStudentScore_F(studentNo.value)">
+    </div>
+    <div>
+        <input type="button" value="取得部門資訊01" onclick="getDepartment1()">
+        <input type="button" value="取得部門資訊02" onclick="getDepartment2()">
+    </div>
+
+    <hr>
+    <h1 id="myTimer"></h1>
+    <h1 id="myTimer2"></h1>
+    <h1 id="myTimer3"></h1>
+    <hr>
+    <input type="text" oninput="getResult()">
+    <div id="result"></div>
+    <hr>
+    X座標為<input id="positionX" type="text">，
+    Y座標為<input id="positionY" type="text">
+
+    <hr>
+    <input type="button" value="取得新聞" onclick="getNews()">
+    <div>
+        <span id="newsArea"></span>
+        <span id="blink" style="font-size: 15px; background-color: black;">|</span>
+    </div>
+
+
+
+    <script>
+        //getStudentScore();
+
+        //資料區
+        var arrStudentNo = ["S001", "S002", "S003", "S004", "S005", "S006", "S007", "S008", "S009", "S010"];
+        var arrStudentName = ["王小明", "王大明", "王中明", "王右明", "王左明", "王上明", "王下明", "張三", "李四", "王五"];
+        var arrStudentScore = [92, 87, 56, 68, 85, 83, 77, 71, 85, 93];
+        var arrGrade = [];
+        var arrNumber = ["丁等", "丁等", "丁等", "丁等", "丁等", "丁等", "丙等", "乙等", "甲等", "優等", "優等"]; //寫出每10分的級距
+
+
+        //功能1：取得學生成績
+        function getStudentScore() {
+            /* var arrStudentNo = ["S001", "S002", "S003", "S004", "S005", "S006", "S007", "S008", "S009", "S010"];
+            var arrStudentName = ["王小明", "王大明", "王中明", "王右明", "王左明", "王上明", "王下明", "張三", "李四", "王五"];
+            var arrStudentScore = [92, 87, 56, 68, 85, 83, 77, 71, 85, 93];
+            var arrGrade = [];
+            //不使用迴圈來判斷等第 >> 用空間換取時間
+            var arrNumber = ["丁等", "丁等", "丁等", "丁等", "丁等", "丁等", "丙等", "乙等", "甲等", "優等", "優等"]; //寫出每10分的級距 */
+            var index = 0; //index為陣列的索引值
+            for (var i = 0; i < arrStudentScore.length; i++) {
+                index = parseInt(arrStudentScore[i] / 10);
+                arrGrade.push(arrNumber[index]);
+            }
+            for (var k = 0; k < arrStudentNo.length; k++) {
+                document.write(arrStudentNo[k] + "-" + arrStudentName[k] + "-" + arrStudentScore[k] + "-" + arrGrade[k] + "<br>");
+            }
+        }
+
+        //功能2：取得某位特定學生成績
+        function getStudentScore_F() {
+            var No = document.getElementById("studentNo").value - 1; //-1是因為陣列的索引值從0開始 
+            /* var arrStudentNo = ["S001", "S002", "S003", "S004", "S005", "S006", "S007", "S008", "S009", "S010"];
+            var arrStudentName = ["王小明", "王大明", "王中明", "王右明", "王左明", "王上明", "王下明", "張三", "李四", "王五"];
+            var arrStudentScore = [92, 87, 56, 68, 85, 83, 77, 71, 85, 93];
+            var arrGrade = [];
+            //不使用迴圈來判斷等第 >> 用空間換取時間
+            var arrNumber = ["丁等", "丁等", "丁等", "丁等", "丁等", "丁等", "丙等", "乙等", "甲等", "優等", "優等"]; //寫出每10分的級距 */
+            var index = 0; //index為陣列的索引值
+            index = parseInt(arrStudentScore[No] / 10);
+            arrGrade.push(arrNumber[index]);
+            document.write(arrStudentNo[No] + "-" + arrStudentName[No] + "-" + arrStudentScore[No] + "-" + arrNumber[index] + "<br>");
+        }
+
+        document.write("<hr>");
+        ////////////////////////////////////////////////////////////////////////////////////
+        //情境
+        /*
+                部門代碼	部門名稱
+                   01	    資訊部
+                   02	    管理部
+                   03	    行銷部
+                   04	    企劃部
+                   05	    人事處
+       */
+
+        var arrDep = ["01-資訊部", "02-管理部", "03-行銷部", "04-企劃部", "05-人事處"];
+        function getDepartment1() {
+            for (var i = 0; i < arrDep.length; i++) {
+                arrDep[i] = arrDep[i].split(",")[0]; //將陣列中的字串以","為分隔符號切割
+                document.write(arrDep[i] + "<br>");
+            }
+
+
+        }
+
+        var arrDep2 = ["資訊部", "管理部", "行銷部", "企劃部", "人事處"];
+        function getDepartment2() {
+            for (var i = 0; i < arrDep2.length; i++) {
+                document.write("0" + (i + 1) + "-" + arrDep2[i] + "<br>");
+            }
+
+
+        }
+        /* document.write("01-資訊部<br>");
+        document.write("02-管理部<br>");
+        document.write("03-行銷部<br>");
+        document.write("04-企劃部<br>");
+        document.write("05-人事處<br>"); */
+
+
+        //-------------------------------------------------------------------------------------------------------------------------------------------------------------
+        //實例-小時鐘
+        //講解重點:物件的建構
+
+        function getTime() {
+            var date = new Date(); //取得當前時間
+            var Timer = document.getElementById("myTimer"); //取得id為myTimer的元素
+            Timer.innerHTML = date.getFullYear() + "/" + date.getMonth() + "/" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds(); //將時間顯示在myTimer中
+        }
+
+        setInterval(getTime, 1000); //每100毫秒執行一次getTime()函數
+        document.write("<br>");
+
+        //【個位數前面補0】 <<初步寫法用if else，現在使用節省語法的寫法
+        function getTime2() {
+            var date = new Date(); //取得當前時間
+            var Timer = document.getElementById("myTimer2"); //取得id為myTimer2的元素
+            var M = date.getMonth() < 10 ? "0" + date.getMonth() : date.getMonth(); //如果月份小於10，則在前面補0
+            var D = date.getDate() < 10 ? "0" + date.getDate() : date.getDate(); //如果日期小於10，則在前面補0
+            var h = date.getHours() < 10 ? "0" + date.getHours() : date.getHours(); //如果小時小於10，則在前面補0
+            var m = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes(); //如果分鐘小於10，則在前面補0
+            var s = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds(); //如果秒數小於10，則在前面補0
+            Timer.innerHTML = date.getFullYear() + "/" + M + "/" + D + " " + h + ":" + m + ":" + s; //將時間顯示在myTimer中
+        }
+        setInterval(getTime2, 1000); //每100毫秒執行一次getTime()函數
+
+        //【提昇內聚力】
+        //getTime3 << 取得現在時間，並叫用將時間補0的程式後，再顯示出來
+        //timeWithZero << 將時間補0的程式
+        function getTime3() {
+            var date = new Date(); //取得當前時間
+            var Timer = document.getElementById("myTimer3"); //取得id為myTimer3的元素
+            Timer.innerHTML = timeWithZero(date);
+        }
+        setInterval(getTime3, 1000); //每100毫秒執行一次getTime()函數
+
+        function timeWithZero(t) {
+            var M = t.getMonth();
+            var D = t.getDate();
+            var h = t.getHours();
+            var m = t.getMinutes();
+            var s = t.getSeconds();
+            var M = M < 10 ? "0" + M : M; //如果月份小於10，則在前面補0
+            var D = D < 10 ? "0" + D : D; //如果日期小於10，則在前面補0
+            var h = h < 10 ? "0" + h : h; //如果小時小於10，則在前面補0
+            var m = m < 10 ? "0" + m : m; //如果分鐘小於10，則在前面補0
+            var s = s < 10 ? "0" + s : s; //如果秒數小於10，則在前面補0
+
+            return t.getFullYear() + "/" + M + "/" + D + " " + h + ":" + m + ":" + s; //將時間顯示在myTimer中
+        }
+
+
+
+        //----------------------------------------------------------------------------------------------------------
+        //練習題：實時輸入 <<事件(Event)傳遞
+        function getResult() {
+            var result = document.getElementById("result"); //取得id為result的元素
+            console.log(event.target.value); //取得事件的目標元素的值
+            result.innerHTML = event.target.value; //將事件的目標元素的值顯示在result中
+        }
+
+
+        //----------------------------------------------------------------------------------------------------------
+        //練習題：滑鼠座標 <<事件(Event)傳遞
+        function getMousePosition(event) {
+            var positionX = document.getElementById("positionX"); //取得id為positionX的元素
+            var positionY = document.getElementById("positionY"); //取得id為positionY的元素
+
+            //console.log(event.clientX); //取得滑鼠的X座標
+            //console.log(event.clientY); //取得滑鼠的Y座標
+            console.log(event.pageX); //取得滑鼠的X座標
+            console.log(event.pageY); //取得滑鼠的Y座標
+
+            positionX.value = event.clientX; //將滑鼠的X座標顯示在positionX中
+            positionY.value = event.clientY; //將滑鼠的Y座標顯示在positionY中
+        }
+
+        document.addEventListener("mousemove", getMousePosition); //當滑鼠移動時，執行getMousePosition()函數
+
+
+
+        //----------------------------------------------------------------------------------------------------------
+        //實例-打字機效果
+        //講解重點:字串操作及時間延遲
+
+        var str = `貴婦奈奈與黃博健合開「杏立博全」醫美診所於民國107年間無預警歇業，積欠廠商款項，疑涉惡性倒閉。
+                    事發後，貴婦奈奈、黃博健與掛名診所院長的黃立雄，去向不明，遭民眾提告詐欺，因遲未到案，遭台北地檢署通緝。法務部調查局掌握貴婦奈奈、黃博健、黃立雄潛逃到加拿大多倫多，108年間，將三人列入外逃通緝犯名單。
+                    《鏡週刊》今天報導指出，貴婦奈奈主動聯繫台北地檢署與調查局，表明將在下個月從加拿大返國投案，讓檢調啟動後續遣返作業，並寫信向台北地檢署檢察長與調查局長，細說遭控吸金詐欺的始末。
+                    報導另指出，貴婦奈奈強調她沒有參與黃博健家族經營的杏立博全診所，也未涉及不法，希望回台協助檢調查明案情，讓真相大白。
+                    台北地檢署透過訊息表示，有關媒體報導內容，目前無法證實，全力查緝潛逃境外的被告到案。
+                    另一方面，黃立雄、黃林麗真夫妻因未獲繼續居留，去年主動聯繫台灣調查局人員，並稱在加拿大遭到黑道追債、恐嚇，願意返台說明案情。黃立雄夫妻於去年5月間押解返台，並分別解送台北、士林地檢署歸案。檢察官訊後，諭令黃林麗真無保請回；黃立雄新台幣50萬元交保，並實施科技監控。
+                    黃林麗真所涉及詐欺案，士檢檢察官認定罪嫌不足，予以不起訴處分；黃立雄所涉吸金案，目前仍由北檢持續偵辦中。`
+        var newsArea = document.getElementById("newsArea");
+
+        var i = 0; //i為字串的索引值 
+        function getNews() {
+            if (i < str.length) {
+                newsArea.innerHTML += str.substr(i, 1); //將字串中的第i個字元顯示在newsArea中
+                i++; //i加1
+                setTimeout(getNews, 100); //每100毫秒執行一次getNews()函數
+            }
+            /* else{
+                setTimeout(0, 100);
+            } */
+        }
+
+        starBlink();
+        function starBlink() {
+            var blink = document.getElementById("blink"); //取得id為blink的元素
+            blink.style.visibility == "visible" ? blink.style.visibility = "hidden" : blink.style.visibility = "visible";
+            setTimeout(starBlink, 500);
+        }
+
+
+    </script>
+</body>
+
+</html>

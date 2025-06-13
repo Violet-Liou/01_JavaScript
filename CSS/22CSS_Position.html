@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #container {
+            width: 1266px;
+            margin: auto;
+        }
+
+        #container>section {
+            display: flex;
+            flex-direction: row;
+
+        }
+
+        nav {
+            float: left;
+        }
+
+        article {
+            float: right;
+        }
+
+        footer {
+            clear: both;
+        }
+
+        #banner1 {
+            position: fixed;
+            top: 0px;
+            left: 0px;
+        }
+
+        #banner2 {
+            position: absolute;
+            top: 0px;
+            right: 0px;
+        }
+
+        #ad {
+            position: fixed;
+            left: 433px;
+            top:50px;
+            box-shadow: 0px 0px 20px gray;
+        }
+
+        #closeAd {
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            background-color: gray;
+            color: white;
+            font-size: 20px;
+            padding: 5px;
+            cursor: pointer;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <div id="ad">
+            <span id="closeAd">close⊕</span>
+            <br>
+            <img src="ad.jpg">
+        </div>
+        <header>
+            <img src="top.jpg">
+        </header>
+        <section>
+            <nav>
+                <img src="left.jpg">
+            </nav>
+            <article>
+                <img src="right.jpg">
+            </article>
+        </section>
+        <footer>
+            <img src="bottom.jpg">
+        </footer>
+
+        <div id="banner1"><img src="banner1.jpg"></div>
+        <div id="banner2"><img src="banner2.jpg"></div>
+        
+
+    </div>
+
+    <script>
+
+        //直接對物件操作，讓該廣告呈現none，而被隱藏
+       /*  function closeAd() {
+            document.getElementById("ad").style.display = "none";
+        }
+        document.getElementById("closeAd").onclick = closeAd; */
+
+        //運用class設置一個hidden，更改className為hidden即可完成一樣的操作
+        function closeAd() {
+            document.getElementById("ad").className = "hidden";
+        }
+        document.getElementById("closeAd").onclick = closeAd;
+    </script>
+    
+</body>
+
+</html>

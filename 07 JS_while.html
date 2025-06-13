@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //用while迴圈的寫法跑出一組h1~h6
+        var i = 1;
+        while (i <= 6) {
+            document.write(`<h${i}>I Love U</h${i}>`);
+            i++;
+        }
+
+        document.write("<hr/>");
+        //計算1~1000加總
+        var j = 1;
+        var sum = 0;
+        while (j <= 1000) {
+            sum = sum + j;
+            j++;
+        }
+        document.write(sum);
+
+        document.write("<hr/>");
+        //依據使用者輸入層數，畫星星
+        var s = 1;
+        var star_draw = parseInt(prompt("請輸入星星的層數"));
+        var star = "";
+        while (s <= star_draw) {
+            star = star + "*";
+            document.write(star + "<br/>");
+            s++;
+        }
+
+        document.write("<hr/>");
+        //雞兔同籠
+        //已知雞兔共35隻,雞兔的腳共94支,請問籠子裡雞兔各有幾隻?
+        //【我的寫法】
+        var chicken = 0;
+        var rabbit = 0;
+        while (chicken + rabbit <= 35) {
+            if (((35 - rabbit) * 2) + (rabbit * 4) == 94) {
+                document.write("雞有" + (35 - rabbit) + "隻");
+                document.write("，兔子有" + rabbit + "隻");
+                break;
+            }
+            rabbit++;
+        }
+        document.write("<hr/>");
+        //【老師的寫法】
+        var rabbit = 0;
+        while ((35 - rabbit) * 2 + rabbit * 4 != 94) {
+            rabbit++;
+        }
+        document.write("雞有" + (35 - rabbit) + "隻，兔子有" + rabbit + "隻");
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //1.信用卡付款 2.現金付款 3.轉帳付款 4.Line Pay 5.貨到付款
+        var paytype = prompt("請輸入你請選擇付款方式:1.信用卡付款 2.現金付款 3.轉帳付款 4.Line Pay 5.貨到付款");
+
+        paytype = parseInt(paytype); //如為小數點，則無條件捨棄小數點位。如為文字，則為NaN(NaN也是一種number)
+
+        if (paytype == 1) {
+            document.write("您選擇使用「信用卡付款」。");
+        }
+        else if (paytype == 2) {
+            document.write("您選擇使用「現金付款」。");
+        }
+        else if (paytype == 3) {
+            document.write("您選擇使用「轉帳付款」。");
+        }
+        else if (paytype == 4) {
+            document.write("您選擇使用「Line Pay」。");
+        }
+        else if (paytype == 5) {
+            document.write("您選擇使用「貨到付款」。");
+        }
+        else if (paytype > 5 || paytype < 1 || paytype === "" || isNaN(paytype)) { //需要再加入防呆機制
+            document.write("請輸入1~5的整數");
+        }
+        else if (paytype === "") {
+            document.write("請輸入1~5的整數");
+        }
+
+        document.write(`<hr>`);
+
+        //onclick事件
+        /* function click() {
+            document.write("已收到您的款項。");
+        } */
+
+        //--------------------------------------------------------------------------------------
+        //90分以上為優等，80~89分為甲等，70~79分為乙等，60~69分為丙等, 60分以下為丁等
+
+        var studentScore = prompt("請輸入學生的分數");
+        studentScore = parseInt(studentScore);
+
+        if (studentScore >= 90 && studentScore <= 100) {
+            document.write("恭喜您，您非常優秀，成績為【優等】");
+        }
+        else if (studentScore < 90 && studentScore >= 80) {
+            document.write("恭喜您，您非常不錯，成績為【甲等】");
+        }
+        else if (studentScore < 80 && studentScore >= 70) {
+            document.write("恭喜您，您非常棒，成績為【乙等】");
+        }
+        else if (studentScore < 70 && studentScore >= 60) {
+            document.write("恭喜您，您很棒，成績為【丙等】");
+        }
+        else if (studentScore < 60 && studentScore >= 0) {
+            document.write("您的成績為【丁等】，還需再接再厲。");
+        }
+        else if (isNaN(studentScore) || studentScore === "" || studentScore < 0) {
+            document.write("輸入的格式不正確，請輸入正整數！");
+        }
+        document.write(`<hr>`);
+
+        //------------------------------------------------------------------------------------------------------
+        //switch case用法
+        var payType = parseInt(prompt("請輸入你請選擇付款方式:1.信用卡付款 2.現金付款 3.轉帳付款 4.Line Pay 5.貨到付款"));
+
+        switch (payType) {
+            case 1:
+                document.write("信用卡付款");
+                break;
+            case 2:
+                document.write("現金付款");
+                break;
+            case 3:
+                document.write("轉帳付款");
+                break;
+            case 4:
+                document.write("Line Pay");
+                break;
+            case 5:
+                document.write("貨到付款");
+                break;
+            default:
+                document.write("格式不正確，請重新輸入！須為1~5之間的數字。");
+                break;
+        }
+        document.write(`<hr>`);
+
+        //--------------------------------------------------------------------------------------------------------------------
+        //區分等第(只能用switch敘述)
+        //90分以上為優等, 80~89分為甲等, 70~79分為乙等
+        //60~69分為丙等, 60分以下為丁等
+
+        //【我的作法】(有上網搜尋用法)
+        var score = parseInt(prompt("請輸入學生的分數"));
+
+        switch (true) {
+            case score == 100:
+                document.write("優等");
+                break;
+            case score >= 90:
+                document.write("優等");
+                break;
+            case score >= 80:
+                document.write("甲等");
+                break;
+            case score >= 70:
+                document.write("乙等");
+                break;
+            case score >= 60:
+                document.write("丙等");
+                break;
+            case score >= 0:
+                document.write("丁等");
+                break;
+            default:
+                document.write("格式不正確，請重新輸入！須為0~100之間的數字。");
+                break;
+        }
+
+        //【老師的作法】
+        var r = parseInt(prompt("請輸入學生的分數"));
+        r = parseInt(r / 10); //因數字的規則性，他的十位數都是同樣的，所以除以10以取得十位數的數字。再用parseInt去無條件捨去小數點後方位數。
+
+        switch (r) {
+            case 10:
+            case 9:
+                document.write("優等");
+                break;
+            case 9:
+                document.write("甲等");
+                break;
+            case 9:
+                document.write("乙等");
+                break;
+            case 9:
+                document.write("丙等");
+                break;
+            default:
+                document.write("丁等");
+                break;
+        }
+
+    </script>
+    <br>
+    <!-- <button onclick="click();">確認</button> -->
+</body>
+
+</html>
