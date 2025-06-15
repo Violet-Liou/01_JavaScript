@@ -7,20 +7,17 @@
     <title>Music Player</title>
     <style>
         :root {
+            --thumb-appearance: none;
+            --thumb-width: 15px;
+            --thumb-height: 15px;
+            --thumb-border-radius: 50%;
+
             /* 進度條 */
-            --progress-thumb-appearance: none;
-            --progress-thumb-width: 15px;
-            --progress-thumb-height: 15px;
             --progress-thumb-background-color: rgb(82, 162, 182);
-            --progress-thumb-border-radius: 50%;
             --progress-thumb-border: 2px solid rgb(4, 170, 211);
 
             /* 音量條 */
-            --vol-thumb-appearance: none;
-            --vol-thumb-width: 15px;
-            --vol-thumb-height: 15px;
             --vol-thumb-background-color: rgb(218, 180, 223);
-            --vol-thumb-border-radius: 50%;
             --vol-thumb-border: 2px solid rgb(228, 124, 210);
         }
 
@@ -64,6 +61,7 @@
         #img img {
             width: 100%;
             height: 100%;
++
             object-fit: cover;
             object-position: center;
             box-shadow: 0px 0px 10px gray;
@@ -174,20 +172,29 @@
         }
 
         #title input[type="range"]::-webkit-slider-thumb:hover {
-            appearance: var(--progress-thumb-appearance);
-            width: var(--progress-thumb-width);
-            height: var(--progress-thumb-height);
+            appearance: var(--thumb-appearance);
+            width: var(--thumb-width);
+            height: var(--thumb-height);
             background-color: var(--progress-thumb-background-color);
-            border-radius: var(--progress-thumb-border-radius);
+            border-radius: var(--thumb-border-radius);
             border: var(--progress-thumb-border);
         }
 
         #volumeControl input[type="range"]::-webkit-slider-thumb {
-            appearance: var(--vol-thumb-appearance);
-            width: var(--vol-thumb-width);
-            height: var(--vol-thumb-height);
+            appearance: var(--thumb-appearance);
+            width: var(--thumb-width);
+            height: var(--thumb-height);
             background-color: var(--vol-thumb-background-color);
-            border-radius: var(--vol-thumb-border-radius);
+            border-radius: var(--thumb-border-radius);
+            border: var(--vol-thumb-border);
+        }
+
+        #volumeControl input[type="range"]::-webkit-slider-thumb:hover {
+            appearance: var(--thumb-appearance);
+            width: var(--thumb-width);
+            height: var(--thumb-height);
+            background-color: var(--vol-thumb-background-color);
+            border-radius: var(--thumb-border-radius);
             border: var(--vol-thumb-border);
         }
 
@@ -196,20 +203,29 @@
             appearance: none;
         }
         #title input[type="range"]::-moz-range-thumb:hover {
-            appearance: var(--progress-thumb-appearance);
-            width: var(--progress-thumb-width);
-            height: var(--progress-thumb-height);
+            appearance: var(--thumb-appearance);
+            width: var(--thumb-width);
+            height: var(--thumb-height);
             background-color: var(--progress-thumb-background-color);
-            border-radius: var(--progress-thumb-border-radius);
+            border-radius: var(--thumb-border-radius);
             border: var(--progress-thumb-border);
         }
 
         #volumeControl input[type="range"]::-moz-range-thumb {
-            appearance: var(--vol-thumb-appearance);
-            width: var(--vol-thumb-width);
-            height: var(--vol-thumb-height);
+            appearance: var(--thumb-appearance);
+            width: var(--thumb-width);
+            height: var(--thumb-height);
             background-color: var(--vol-thumb-background-color);
-            border-radius: var(--vol-thumb-border-radius);
+            border-radius: var(--thumb-border-radius);
+            border: var(--vol-thumb-border);
+        }
+
+        #volumeControl input[type="range"]::-moz-range-thumb:hover {
+            appearance: var(--thumb-appearance);
+            width: var(--thumb-width);
+            height: var(--thumb-height);
+            background-color: var(--vol-thumb-background-color);
+            border-radius: var(--thumb-border-radius);
             border: var(--vol-thumb-border);
         }
 
@@ -249,24 +265,27 @@
     <div><audio id="myMusic" src="../music/moon.mp3" onended="musicPlay()" controls></audio></div>
     <div id="container">
         <select id="musicList" onchange="changeMusic(0)">
-            <option value="../music/moon.mp3">月亮</option>
-            <option value="../music/airball.mp3">氣泡</option>
+            <option value="../music/moon.mp3">私奔到月球</option>
+            <option value="../music/airball.mp3">告白氣球</option>
             <option value="../music/elysees.mp3">Elysees</option>
             <option value="../music/nothing.mp3">Nothing Gonna Change My Love For You</option>
             <option value="../music/rain.mp3">Rain</option>
             <option value="../music/travel.mp3">旅行</option>
+            <option value="../music/dancing at night.mp3">我在夜裡跳舞</option>
         </select>
         <div id="img">
-            <img src="../img/1.jpg" alt="月亮">
+            <img src="../img/1.jpg" alt="私奔到月球">
         </div>
         <div id="controlPanel">
             <div id="title">
-                <div id="mainTitle">月亮</div>
+                <div id="mainTitle">私奔到月球</div>
                 <div>
                     <span id="time">00:00 / 00:00</span>
                     <span id="status">循環播放</span>
+                    <!-- <input id="titlebartext" type="text" style="width: 80px;" readonly>
+                    <input id="titlebartext2" type="text" style="width: 80px;" readonly> -->
                 </div>
-                <input id="titlebar" type="range" oninput="setTime();" min="0" step="1" value="0">
+                <input id="titlebar" type="range" oninput="setTime();" min="0" step="1" value="0" >  
             </div>
             <div id="btn">
                 <span onclick="changeMusic(-1);">9</span>
@@ -300,7 +319,10 @@
             if (myMusic.paused) {
                 myMusic.play();
                 document.getElementById("control1").innerHTML = ";";
+
+                
                 setTimeInitial();
+                console.log("播放音樂");
             } else {
                 myMusic.pause();
                 document.getElementById("control1").innerHTML = "4";
@@ -321,29 +343,6 @@
             document.getElementById("control1").innerHTML = "4"; //修改播放符號
         }
 
-        //選擇歌曲
-        function changeMusic(n) {
-            var musicList = document.getElementById("musicList");
-            var mainTitle = document.getElementById("mainTitle");
-            var img = document.getElementById("img").children[0];
-            var v = musicList.selectedIndex; //獲取目前選擇的歌曲索引
-            var index = v + n; //計算新的歌曲索引
-            myMusic.src = musicList.options[index % 6].value; //更改音樂來源
-            mainTitle.innerHTML = musicList.options[index % 6].innerText; //更改音樂標題
-            musicList.children[index % 6].selected = true; //更新選擇的歌曲索引
-
-            if((index + 1) % 6 == 0) {
-                img.src = `../img/6.jpg`; //如果是第六首歌，則圖片顯示第六張
-            }else{
-                img.src = `../img/${(index + 1) % 6}.jpg`; //更改圖片來源
-            }
-
-            if(document.getElementById("control1").innerHTML = ";") {
-                myMusic.onloadeddata = play; //等歌曲載入完畢後再播放音樂
-            }
-
-        }
-
         //快轉&快退
         function backOrForward(v) {
             myMusic.currentTime += v;
@@ -358,7 +357,122 @@
         // }
         }
 
+ ////////【音樂進度條】//////////////////////////////////////////////////////////////////////////////////////////////////////
+        var title = document.getElementById("title");
+        var titlebar = document.getElementById("titlebar");
+        var time = document.getElementById("time");
+        var text = document.getElementById("status");
 
+        //時間格式
+        function formatTime(t) {
+            var minutes = parseInt(t.toFixed(0) / 60);
+            var seconds = parseInt(t.toFixed(0) % 60);
+
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            return minutes + ":" + seconds;
+        }
+       
+        //點擊音樂進度條
+        function setTime(){
+            myMusic.currentTime = titlebar.value / 10000; //初始化音樂當前時間
+        }
+        
+
+        //更新音樂進度條
+        function setProcessRange(){
+            var currentTime = myMusic.currentTime; //目前播放時間
+            var duration = myMusic.duration; //音樂總長度
+
+            time.innerHTML = formatTime(currentTime) + " / " + formatTime(duration); //顯示時間
+            titlebar.value = currentTime *10000;
+            // console.log(titlebar.value);
+
+            var percent = (currentTime / duration) * 100; //計算進度條百分比
+            //塗音量條的顏色
+            titlebar.style.backgroundImage = `linear-gradient(to right, rgb(157, 109, 219) 0%, rgb(109, 111, 219) ${percent}%,white ${percent}%)`;
+        }
+
+        //初始化音樂進度條
+        function setTimeInitial(){
+                titlebar.max = myMusic.duration*10000; //音樂的總長度
+                setInterval(setProcessRange,10); //更新音樂進度條
+        }
+
+////////【歌曲控制(選曲、模式)】////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        var mode = document.getElementById("mode");
+
+        //選擇歌曲
+        function changeMusic(n) {
+            var musicList = document.getElementById("musicList");
+            var mainTitle = document.getElementById("mainTitle");
+            var img = document.getElementById("img").children[0];
+            var v = musicList.selectedIndex; //獲取目前選擇的歌曲索引
+            var index = v + n; //計算新的歌曲索引
+            if(index < 0) {
+                index = musicList.length - 1; //如果索引小於0，則選擇最後一首歌
+            } else if (index >= musicList.length) {
+                index = 0; //如果索引大於歌曲數量，則選擇第一首歌
+            }
+            myMusic.src = musicList.options[index].value; //更改音樂來源
+            mainTitle.innerHTML = musicList.options[index].innerText; //更改音樂標題
+            musicList.children[index].selected = true; //更新選擇的歌曲索引
+            
+            //更改圖片來源
+            if((index + 1) % 7 == 0) {
+                img.src = `../img/7.jpg`; //如果是第七首歌，則圖片顯示第七張
+            }else{
+                img.src = `../img/${(index + 1) % 7}.jpg`; 
+            }
+
+            console.log("目前選擇的歌曲索引：" + index);
+            console.log("v : " + v);
+            console.log("n : " + n);
+
+
+            myMusic.load();
+            if(document.getElementById("control1").innerHTML == ";") {
+                myMusic.onloadeddata = play; //等歌曲載入完畢後再播放音樂
+                
+            }
+            myMusic.onloadedmetadata = function() {
+                setTimeInitial();
+    };
+
+        }
+
+        //音樂模式 (循環、隨機、單曲循環)
+        function musicPlay(){
+            if(text.innerText == "循環播放" && musicList.length == musicList.selectedIndex + 1){
+                changeMusic(0 - musicList.selectedIndex);
+            } else if (text.innerText == "隨機播放") {
+                var n = Math.floor(Math.random() * musicList.length); //隨機在musicList中選擇一首歌
+                if(n != musicList.selectedIndex) {
+                    changeMusic(n - musicList.selectedIndex);
+                } else {
+                    changeMusic(1); //如果隨機到的歌曲是目前播放的歌曲，則改為下一首
+                }
+            } else if (text.innerText == "單曲循環") {
+                changeMusic(0);
+            } else{
+                changeMusic(1);
+            }
+        }
+        function musicMode(){
+            if (text.innerText == "循環播放") {
+                mode.innerHTML = "s";
+                text.innerHTML = "隨機播放";
+            } else if (text.innerText == "隨機播放") {
+                mode.innerHTML = "`";
+                text.innerHTML = "單曲循環";
+            }else if (text.innerText == "單曲循環") {
+                mode.innerHTML = "q";
+                text.innerHTML = "循環播放";
+            }
+        }
+        
+///////【音效控制】///////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //靜音
         function sound() {
             // if (myMusic.muted) {
@@ -404,82 +518,10 @@
             myMusic.volume = textVolumn.value / 100; //真正寫入音量屬性值
 
             //塗音量條的顏色
-            rangeVolumn.style.backgroundImage = `linear-gradient(to right, pink 10%,rgb(218, 180, 223) ${rangeVolumn.value}%,white ${rangeVolumn.value}%)`;
+            rangeVolumn.style.backgroundImage = `linear-gradient(to right, pink 0%,rgb(218, 180, 223) ${rangeVolumn.value}%,white ${rangeVolumn.value}%)`;
         }
 
         setVolumnRange(); //初始化音量
-
-        //音樂進度條
-        var title = document.getElementById("title");
-        var titlebar = document.getElementById("titlebar");
-        var time = document.getElementById("time");
-        var text = document.getElementById("status");
-
-        //時間格式
-        function formatTime(t) {
-            var minutes = parseInt(t.toFixed(0) / 60);
-            var seconds = parseInt(t.toFixed(0) % 60);
-
-            minutes < 10 ? "0" + minutes : minutes;
-            seconds < 10 ? "0" + seconds : seconds;
-
-            return minutes + ":" + seconds;
-        }
-        //更新音樂當前時間
-        function setTime(){
-            // myMusic.currentTime = titlebar.value / 10000;
-            // setProcessRange();
-        }
-        
-        function setTimeInitial(){
-            // titlebar.max = myMusic.duration * 10000; //音樂的總長度
-            // setInterval(setProcessRange, 1000);
-        }
-
-        function setProcessRange() {
-            // var currentTime = myMusic.currentTime; //目前播放時間
-            // var duration = myMusic.duration; //音樂總長度
-
-            // time.innerHTML = formatTime(currentTime) + " / " + formatTime(duration); //顯示時間
-            // titlebar.value = currentTime * 10000; //更新進度條的值
-
-            // myMusic.currentTime = titlebar.value / 10000;
-
-            // var percent = (currentTime / duration) * 100; //計算進度條百分比
-            // //塗音量條的顏色
-            // titlebar.style.backgroundImage = `linear-gradient(to right, rgb(157, 109, 219) 1%, rgb(109, 111, 219) ${percent}%,white ${percent}%)`;
-        }
-
-        var mode = document.getElementById("mode");
-        //音樂模式 (循環、隨機、單曲循環)
-        function musicPlay(){
-            if(text.innerText == "循環播放" && musicList.length == musicList.selectedIndex + 1){
-                changeMusic(0 - musicList.selectedIndex);
-            } else if (text.innerText == "隨機播放") {
-                var n = Math.floor(Math.random() * musicList.length); //隨機在musicList中選擇一首歌
-                if(n != musicList.selectedIndex) {
-                    changeMusic(n - musicList.selectedIndex);
-                } else {
-                    changeMusic(1); //如果隨機到的歌曲是目前播放的歌曲，則改為下一首
-                }
-            } else if (text.innerText == "單曲循環") {
-                changeMusic(0);
-            } else{
-                changeMusic(1);
-            }
-        }
-        function musicMode(){
-            if (text.innerText == "循環播放") {
-                mode.innerHTML = "s";
-                text.innerHTML = "隨機播放";
-            } else if (text.innerText == "隨機播放") {
-                mode.innerHTML = "`";
-                text.innerHTML = "單曲循環";
-            }else if (text.innerText == "單曲循環") {
-                mode.innerHTML = "q";
-                text.innerHTML = "循環播放";
-            }
-        }
 
     </script>
 </body>
