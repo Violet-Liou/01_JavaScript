@@ -12,6 +12,9 @@
             --thumb-height: 15px;
             --thumb-border-radius: 50%;
 
+            --thumb-width-o:10px;
+            --thumb-height-o:10px;
+
             /* 進度條 */
             --progress-thumb-background-color: rgb(82, 162, 182);
             --progress-thumb-border: 2px solid rgb(4, 170, 211);
@@ -166,8 +169,11 @@
         }
 
         /* chrom/edge 的進度條&音量調圓球設定 */
-        #title input[type="range"]::-webkit-slider-thumb{
-            appearance: none;
+        #title input[type="range"]::-webkit-slider-thumb,
+        #volumeControl input[type="range"]::-webkit-slider-thumb{
+            appearance: var(--thumb-appearance);
+            width: var(--thumb-width-o);
+            height: var(--thumb-height-o);
         }
 
         #title input[type="range"]::-webkit-slider-thumb:hover {
@@ -177,15 +183,7 @@
             background-color: var(--progress-thumb-background-color);
             border-radius: var(--thumb-border-radius);
             border: var(--progress-thumb-border);
-        }
-
-        #volumeControl input[type="range"]::-webkit-slider-thumb {
-            appearance: var(--thumb-appearance);
-            width: var(--thumb-width);
-            height: var(--thumb-height);
-            background-color: var(--vol-thumb-background-color);
-            border-radius: var(--thumb-border-radius);
-            border: var(--vol-thumb-border);
+            transition: 0.5s;
         }
 
         #volumeControl input[type="range"]::-webkit-slider-thumb:hover {
@@ -198,9 +196,13 @@
         }
 
         /* 其他版本瀏覽器 的進度條%音量調圓球設定 */
-        #title input[type="range"]::-moz-range-thumb{
-            appearance: none;
+        #title input[type="range"]::-moz-range-thumb,
+        #volumeControl input[type="range"]::-moz-range-thumb{
+            appearance: var(--thumb-appearance);
+            width: var(--thumb-width-o);
+            height: var(--thumb-height-o);
         }
+
         #title input[type="range"]::-moz-range-thumb:hover {
             appearance: var(--thumb-appearance);
             width: var(--thumb-width);
@@ -208,15 +210,6 @@
             background-color: var(--progress-thumb-background-color);
             border-radius: var(--thumb-border-radius);
             border: var(--progress-thumb-border);
-        }
-
-        #volumeControl input[type="range"]::-moz-range-thumb {
-            appearance: var(--thumb-appearance);
-            width: var(--thumb-width);
-            height: var(--thumb-height);
-            background-color: var(--vol-thumb-background-color);
-            border-radius: var(--thumb-border-radius);
-            border: var(--vol-thumb-border);
         }
 
         #volumeControl input[type="range"]::-moz-range-thumb:hover {
