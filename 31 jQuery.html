@@ -4,18 +4,69 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 </head>
 <body>
+    <div class="container">
+        <table id="travel" class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>照片</th>
+                    <th>體型</th>
+                    <th>年齡</th>
+                    <th>區域</th>
+                    <th>備註</th>
+                </tr>
+            </thead>
+            <tbody>
+              
+            </tbody>
+
+        </table>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
+        crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
          $.ajax({
             type:"get",
-            url:'https://data.moa.gov.tw/api/v1/AnimalRecognition/?%24top=10&Page=1',
+            url:'https://data.moa.gov.tw/api/v1/AnimalRecognition/?%24top=30&Page=1',
             success:function(resp){
                 console.log(resp);
                 
-            }
-        
+
+                let data="";
+
+                for (let i = 0; i < resp.Data.length; i++) {
+
+                   data+= `<tr>
+                                <td><img src="${resp.Data[i].album_file}" width="200" ></td>
+                                <td>${resp.Data[i].animal_bodytype}</td>
+                                <td>${resp.Data[i].animal_age}</td>
+                                <td>${resp.Data[i].animal_place}</td>
+                                <td>${resp.Data[i].animal_remark}</td>
+                            </tr>`
+                }
+                console.log(data);
+
+                //  for (let item of resp) {
+
+                //    data+= `<tr>
+                                // <td><img src="${item.album_file}" width="200" ></td>
+                                // <td>${item.animal_bodytype}</td>
+                                // <td>${item.animal_age}</td>
+                                // <td>${item.animal_place}</td>
+                                // <td>${item.animal_remark}</td>
+                //             </tr>`
+                // }
+
+                $('#travel>tbody').html(data);
+            }        
        });
 
     </script>
