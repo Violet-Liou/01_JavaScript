@@ -21,6 +21,7 @@
             height: 250px;
             object-fit: cover;
         }
+
     </style>
 </head>
 
@@ -37,6 +38,9 @@
         <div class="row">
             <!-- 動物認養資料將在這裡動態生成 -->
 
+            <div class="spinner-border text-success" role="status">
+                <span class="sr-only"></span>
+            </div>
         </div>
 
         <!-- Modal -->
@@ -128,7 +132,7 @@
                     let idx = $(this).data('idx'); // 取得 index
                     let item = resp.Data[idx];      // 取得原始資料                   
 
-                    Modal_text += `<div><i class="bi bi-house-heart"></i>： ${item.shelter_name}</div>
+                    Modal_text = `<div><i class="bi bi-house-heart"></i>： ${item.shelter_name}</div>
                                    <div> ${item.shelter_address}</div>
                                    <div><i class="bi bi-telephone-fill"></i>： ${item.shelter_tel}</div>`;
 
